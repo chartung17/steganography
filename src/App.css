@@ -19,9 +19,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
+  width: 100%;
 }
 
 .App-link {
@@ -35,4 +36,41 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+p {
+  font-size: 24px;
+  margin-bottom: 3px;
+  white-space: pre-wrap;
+}
+
+div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+textarea, input, button {
+  margin: 5px;
+  font-size: 16px;
+}
+
+textarea, input, p {
+  width: 800px;
+  max-width: 90%;
+  text-align: center;
+}
+
+textarea: {
+  height: 150px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
