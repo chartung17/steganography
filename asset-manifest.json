@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/steganography/static/css/main.8beb8e9d.chunk.css",
+    "main.js": "/steganography/static/js/main.a42fcec7.chunk.js",
+    "main.js.map": "/steganography/static/js/main.a42fcec7.chunk.js.map",
+    "runtime-main.js": "/steganography/static/js/runtime-main.39fc849e.js",
+    "runtime-main.js.map": "/steganography/static/js/runtime-main.39fc849e.js.map",
+    "static/js/2.c0fdff5a.chunk.js": "/steganography/static/js/2.c0fdff5a.chunk.js",
+    "static/js/2.c0fdff5a.chunk.js.map": "/steganography/static/js/2.c0fdff5a.chunk.js.map",
+    "static/js/3.afd21afd.chunk.js": "/steganography/static/js/3.afd21afd.chunk.js",
+    "static/js/3.afd21afd.chunk.js.map": "/steganography/static/js/3.afd21afd.chunk.js.map",
+    "index.html": "/steganography/index.html",
+    "static/css/main.8beb8e9d.chunk.css.map": "/steganography/static/css/main.8beb8e9d.chunk.css.map",
+    "static/js/2.c0fdff5a.chunk.js.LICENSE.txt": "/steganography/static/js/2.c0fdff5a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.39fc849e.js",
+    "static/js/2.c0fdff5a.chunk.js",
+    "static/css/main.8beb8e9d.chunk.css",
+    "static/js/main.a42fcec7.chunk.js"
+  ]
+}
