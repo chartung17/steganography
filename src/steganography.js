@@ -15,8 +15,9 @@ export async function hideTextInImage(imageUrl, text) {
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const pixels = imageData.data; // RGBA array
 
-  if (canvas.width * canvas.height < 3 * (text.length + 1)) {
-    return { success: false, error: "Image is too small to encode the given text" };
+  const capacity = Math.floor(canvas.width * canvas.height / 3) - 1;
+  if (capacity < text.length) {
+    return { success: false, error: `Image is too small to encode the given text (text is ${text.length} bytes long and image can only encode ${capacity} bytes)` };
   }
 
   for (let i = 0; i < text.length; i++) {
