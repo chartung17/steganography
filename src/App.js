@@ -12,7 +12,8 @@ export default class App extends React.Component {
       text: '',
       imagefile: '',
       display: '',
-      success: false
+      success: false,
+      compress: false,
     }
     this.hide = this.hide.bind(this);
     this.hidefile = this.hidefile.bind(this);
@@ -41,7 +42,7 @@ export default class App extends React.Component {
     this.setState({
       display: 'Loading...'
     });
-    const { success, result, error } = await hideTextInImage(this.state.imagefile, this.state.text);
+    const { success, result, error } = await hideTextInImage(this.state.imagefile, this.state.text, this.state.compress);
     this.setState({
       display: success ? result : error,
       success: success
@@ -52,7 +53,7 @@ export default class App extends React.Component {
     this.setState({
       display: 'Loading...'
     });
-    const { success, result, error } = await hideFileInImage(this.state.imagefile, this.state.text);
+    const { success, result, error } = await hideFileInImage(this.state.imagefile, this.state.text, this.state.compress);
     this.setState({
       display: success ? result : error,
       success: success
@@ -63,7 +64,7 @@ export default class App extends React.Component {
     this.setState({
       display: 'Loading...'
     });
-    const { success, message, error } = await readTextFromImage(this.state.imagefile);
+    const { success, message, error } = await readTextFromImage(this.state.imagefile, this.state.compress);
     this.setState({
       display: success ? message : error,
       success: success
@@ -82,6 +83,10 @@ export default class App extends React.Component {
       To read the hidden message in a file, leave this field blank.</p>
       <TextInput id='text' handleValChange={this.handleTextInputChange}/>
       <br/>
+      <label>
+        <input type="checkbox" checked={this.state.compress} onChange={() => this.setState({ compress: !this.state.compress })} style={{ width: 'unset' }} />
+        Use compression algorithm
+      </label>
       <div>
         <button id='hide' onClick={this.hide}>Hide Text</button>
         <button id='hidefile' onClick={this.hidefile}>Hide Text From File</button>
