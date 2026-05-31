@@ -88,6 +88,7 @@ export default class App extends React.Component {
         <button id='read' onClick={this.read}>Read Hidden Message</button>
       </div>
       <Output text={this.state.display}/>
+      <br/><br/>
       </header>
       </div>
     );

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -42,6 +46,11 @@ p {
   font-size: 24px;
   margin-bottom: 3px;
   white-space: pre-wrap;
+}
+
+.output p {
+  text-wrap: wrap;
+  overflow-wrap: anywhere;
 }
 
 div {

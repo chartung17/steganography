@@ -6,7 +6,6 @@ export default class Output extends React.Component {
     this.state = {
       text: props.text
     }
-    // this.handleTextChange = this.handleTextChange.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -19,12 +18,29 @@ export default class Output extends React.Component {
   }
 
   render() {
-    let text = 'The file containing your hidden message can be found at ';
+    const { text } = this.state;
+    const isUrl = text.startsWith('http') || text.startsWith('blob:');
+    const isBlob = text.startsWith('blob:');
+
     return (
       <div className='output'>
-        {this.state.text.startsWith('http')
-          ? <p>{text}<a href={this.state.text}>{this.state.text}</a></p>
-          : <p>{this.state.text}</p>}
+        {isUrl
+          ? (
+            <div style={{ flexDirection: 'column', alignItems: 'center' }}>
+              <p>
+                {isBlob
+                  ? 'Your encoded image is ready: '
+                  : 'The file containing your hidden message can be found at '}
+                <a href={text} download={isBlob ? 'encoded.png' : undefined}>{text}</a>
+              </p>
+              <img
+                src={text}
+                alt='Output preview'
+                style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'contain', marginTop: '8px' }}
+              />
+            </div>
+          )
+          : <p>{text}</p>}
       </div>
     );
   }
