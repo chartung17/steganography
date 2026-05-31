@@ -3,6 +3,7 @@ import Output from './Output';
 import TextInput from './TextInput';
 import FileInput from './FileInput';
 import './App.css';
+import { hideFileInImage, hideTextInImage, readTextFromImage } from './steganography';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -36,109 +37,36 @@ export default class App extends React.Component {
     return encodeURIComponent(str);
   }
 
-  hide() {
+  async hide() {
     this.setState({
       display: 'Loading...'
     });
-    let requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        imagefile: this.state.imagefile,
-        text: this.state.text,
-        textfile: "none"
-      })
-    };
-    fetch("https://chartung17-steganography.herokuapp.com/hide", requestOptions)
-    .then(res => {
-      return res.json();
-    }, err => {
-      // Print the error if there is one.
-      console.log(err);
-    }).then(result => {
-      let text = '';
-      let success = false;
-      if (result === undefined) {
-        text = 'Unknown error occured'
-      } else {
-        success = result['status'] === 200;
-        text = success ? result['link'] : result['message'];
-      }
-      this.setState({
-        display: text,
-        success: success
-      });
+    const { success, result, error } = await hideTextInImage(this.state.imagefile, this.state.text);
+    this.setState({
+      display: success ? result : error,
+      success: success
     });
   }
 
-  hidefile() {
+  async hidefile() {
     this.setState({
       display: 'Loading...'
     });
-    let requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        imagefile: this.state.imagefile,
-        text: '',
-        textfile: this.state.text
-      })
-    };
-    fetch("https://chartung17-steganography.herokuapp.com/hide", requestOptions)
-    .then(res => {
-      return res.json();
-    }, err => {
-      // Print the error if there is one.
-      console.log(err);
-    }).then(result => {
-      let text = '';
-      let success = false;
-      if (result === undefined) {
-        text = 'Unknown error occured'
-      } else {
-        success = result['status'] === 200;
-        text = success ? result['link'] : result['message'];
-      }
-      this.setState({
-        display: text,
-        success: success
-      });
+    const { success, result, error } = await hideFileInImage(this.state.imagefile, this.state.text);
+    this.setState({
+      display: success ? result : error,
+      success: success
     });
   }
 
-  read() {
+  async read() {
     this.setState({
       display: 'Loading...'
     });
-    let requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        imagefile: this.state.imagefile,
-        text: '',
-        textfile: "none"
-      })
-    };
-    fetch("https://chartung17-steganography.herokuapp.com/read", requestOptions)
-    .then(res => {
-      return res.json();
-    }, err => {
-      // Print the error if there is one.
-      console.log(err);
-    }).then(result => {
-      let text = '';
-      let success = false;
-      if (result === undefined) {
-        text = 'Unknown error occured'
-      } else {
-        success = result['status'] === 200;
-        text = result['message'];
-        if (success) text = 'Hidden message: ' + text;
-      }
-      this.setState({
-        display: text,
-        success: success
-      });
+    const { success, message, error } = await readTextFromImage(this.state.imagefile);
+    this.setState({
+      display: success ? message : error,
+      success: success
     });
   }
 
